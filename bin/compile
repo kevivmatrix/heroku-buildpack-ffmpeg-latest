@@ -7,7 +7,7 @@ indent() {
 echo "-----> Install ffmpeg"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
-DOWNLOAD_URL="https://www.johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz"
+DOWNLOAD_URL="https://www.dropbox.com/s/xqx49m3dc2azjt5/archive.tar.xz?dl=1"
 
 echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 
@@ -23,9 +23,3 @@ PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="$PATH:${HOME}/vendor/ffmpeg"' >> $PROFILE_PATH
 
-
-git -C x264 pull 2> /dev/null || git clone --depth 1 https://git.videolan.org/git/x264
-cd x264
-./configure --extra-cflags=-march=native --enable-static --disable-interlaced --bit-depth=10 --disable-asm
-make -j2
-install x264 /usr/local/bin/x264
