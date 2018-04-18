@@ -22,3 +22,9 @@ echo "exporting PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="$PATH:${HOME}/vendor/ffmpeg"' >> $PROFILE_PATH
+
+
+git -C x264 pull 2> /dev/null || git clone --depth 1 https://git.videolan.org/git/x264
+./configure --extra-cflags=-march=native --enable-static --disable-interlaced --bit-depth=10 --disable-asm
+make -j2
+install x264 /usr/local/bin/x264
